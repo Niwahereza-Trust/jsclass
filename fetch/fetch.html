@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetch API Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    .user {
+      background: white;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0px 2px 4px rgba(0,0,0,0.1);
+    }
+    .email {
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Users List</h1>
+  <div id="users"></div>
+
+  <script>
+    // Step 1: Fetch the API data
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then(response => response.json()) // Step 2: Convert to JSON
+      .then(users => {
+        const usersContainer = document.getElementById("users");
+
+        // Step 3: Loop through each user and display it
+        users.forEach(user => {
+          const userDiv = document.createElement("div");
+          userDiv.classList.add("user");
+
+          userDiv.innerHTML = `
+            <h3>${user.name}</h3>
+            <p class="email">${user.email}</p>
+          `;
+
+          usersContainer.appendChild(userDiv);
+        });
+      })
+      .catch(error => {
+        console.error("Error fetching users:", error);
+      });
+  </script>
+
+</body>
+</html>
